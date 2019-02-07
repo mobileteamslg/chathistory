@@ -27,6 +27,9 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'androidx.appcompat:appcompat:1.0.2'
+
+//    implementation 'com.github.mobileteamslg.chathistory:core:0.0.1'
+//    implementation 'com.github.mobileteamslg.chathistory:firebasehistory:0.0.1'
 //
 //    implementation 'com.mobileteam.chathistory:core:0.0.2'
 //    implementation 'com.mobileteam.chathistory:firebasehistory:0.0.2'
