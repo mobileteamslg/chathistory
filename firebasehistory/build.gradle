@@ -2,6 +2,12 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 
+apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'maven-publish'
+
+def packageName = 'com.mobileteam.chathistory'
+def libraryVersion = '0.0.2'
+
 android {
     compileSdkVersion 28
 
@@ -19,7 +25,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -33,10 +39,54 @@ dependencies {
     // firebase
     implementation 'com.google.firebase:firebase-database:16.0.6'
 
+    // recycler view
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+    // android arch components
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.0.0'
+
     testImplementation 'junit:junit:4.12'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 repositories {
     mavenCentral()
+}
+
+
+publishing{
+    publications{
+        aar(MavenPublication){
+            groupId packageName
+            version = libraryVersion
+            artifactId project.getName() //the ArtifactId
+
+            // Tell maven to prepare the generated "*.aar" file for publishing
+            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+        }
+    }
+}
+
+artifactory {
+    contextUrl = 'http://localhost:8081/artifactory'
+    publish {
+        repository {
+            // The Artifactory repository key to publish to
+            repoKey = 'libs-release-local'
+
+            username = "admin"
+            password = "mobileteamslg2019"
+        }
+        defaults {
+            // Tell the Artifactory Plugin which artifacts should be published to Artifactory.
+            publications('aar')
+            publishArtifacts = true
+
+            // Properties to be attached to the published artifacts.
+            properties = ['qa.level': 'basic', 'dev.team': 'core']
+            // Publish generated POM files to Artifactory (true by default)
+            publishPom = true
+        }
+    }
 }
