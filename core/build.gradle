@@ -1,12 +1,12 @@
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-android'
+
 
 apply plugin: 'com.github.dcendents.android-maven'
 
 group='com.github.mobileteamslg.chathistory'
 
 apply plugin: 'com.android.library'
-
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
