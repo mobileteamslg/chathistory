@@ -8,7 +8,7 @@ apply plugin: 'kotlin-android'
 
 //group='com.github.mobileteamslg.chat-with-history'
 
-apply plugin: 'maven'
+//apply plugin: 'maven'
 
 //def packageName = 'com.mobileteam.chathistory'
 //def libraryVersion = '0.0.2'
@@ -51,43 +51,43 @@ dependencies {
 repositories {
     mavenCentral()
 }
-
-uploadArchives{
-    configuration = configurations.archives
-    repositories.mavenDeployer {
-        pom.groupId = 'com.mobileteam.chathistory'
-        pom.artifactId = 'core'
-        pom.version = '0.0.1'
-        configuration = configurations.deployerJar
-        repository(url: "git:releases://git@bitbucket.org:baidikoff/maven-repository.git")
-        snapshotRepository(url: "git:snapshots://git@bitbucket.org:baidikoff/maven-repository.git")
-        pom.project {
-            name 'ChatWithHistory'
-            packaging 'aar'
-            description 'This is a chat with history'
-//            url POM_URL
-            scm {
-                url POM_SCM_URL
-                connection POM_SCM_CONNECTION
-                developerConnection POM_SCM_DEV_CONNECTION
-            }
-            licenses {
-                license {
-                    name POM_LICENCE_NAME
-                    url POM_LICENCE_URL
-                    distribution POM_LICENCE_DIST
-                }
-            }
-            developers {
-                developer {
-                    id POM_DEVELOPER_ID
-                    name POM_DEVELOPER_NAME
-                    email POM_DEVELOPER_EMAIL
-                }
-            }
-        }
-    }
-}
+//
+//uploadArchives{
+//    configuration = configurations.archives
+//    repositories.mavenDeployer {
+//        pom.groupId = 'com.mobileteam.chathistory'
+//        pom.artifactId = 'core'
+//        pom.version = '0.0.1'
+//        configuration = configurations.deployerJar
+//        repository(url: "git:releases://git@bitbucket.org:baidikoff/maven-repository.git")
+//        snapshotRepository(url: "git:snapshots://git@bitbucket.org:baidikoff/maven-repository.git")
+//        pom.project {
+//            name 'ChatWithHistory'
+//            packaging 'aar'
+//            description 'This is a chat with history'
+////            url 'https://github.com/mobileteamslg/Chat-With-History'
+//            scm {
+//                url POM_SCM_URL
+////                connection 'https://github.com/mobileteamslg/Chat-With-History.git'
+//                developerConnection POM_SCM_DEV_CONNECTION
+//            }
+//            licenses {
+//                license {
+//                    name POM_LICENCE_NAME
+//                    url POM_LICENCE_URL
+//                    distribution POM_LICENCE_DIST
+//                }
+//            }
+//            developers {
+//                developer {
+//                    id POM_DEVELOPER_ID
+//                    name POM_DEVELOPER_NAME
+//                    email POM_DEVELOPER_EMAIL
+//                }
+//            }
+//        }
+//    }
+//}
 
 //publishing{
 //    publications{
