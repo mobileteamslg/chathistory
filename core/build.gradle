@@ -11,7 +11,7 @@ apply plugin: 'kotlin-android'
 //apply plugin: 'maven'
 
 //def packageName = 'com.mobileteam.chathistory'
-def libraryVersion = '0.0.2'
+//def libraryVersion = '0.0.2'
 
 android {
     compileSdkVersion 28
