@@ -11,17 +11,16 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.Query
 import com.mobileteam.chathistory.ChatError
 import com.mobileteam.chathistory.history.HistoryLoadingListener
-import com.mobileteam.chathistory.holder.ChatViewHolder
-import com.mobileteam.chathistory.holder.ChatViewHolderBuilder
-import com.mobileteam.chathistory.holder.UndefinedChatViewHolder
-import com.mobileteam.chathistory.holder.builder
+import com.mobileteam.chathistory.holder.*
 import com.mobileteam.chathistory.listeners.livedata.ItemsObserver
 import com.mobileteam.chathistory.util.itemType
 import com.mobileteam.chathistory.util.observe
 import com.mobileteam.chathistory.viewmodel.BaseChatViewModel
 
-abstract class ChatHistoryAdapter<ChatViewModelType : BaseChatViewModel>(chatHistoryAdapterParams: ChatHistoryAdapterParams,
-                                                                         protected val chatViewModel: ChatViewModelType) : RecyclerView.Adapter<ChatViewHolder>(),
+abstract class ChatHistoryAdapter<ChatViewModelType : BaseChatViewModel>(
+    chatHistoryAdapterParams: ChatHistoryAdapterParams,
+    protected val chatViewModel: ChatViewModelType
+) : RecyclerView.Adapter<ChatViewHolder>(),
     LifecycleObserver {
 
     init {
@@ -89,8 +88,10 @@ abstract class ChatHistoryAdapter<ChatViewModelType : BaseChatViewModel>(chatHis
     }
 
     private fun performInitialQuery(initialSize: Int) = with(chatViewModel) {
-        owner?.observe(initialQueryLiveData, initialDataObserver)
-        owner?.observe(failuresLiveData, failuresDataObserver)
+        owner?.let {
+            it.observe(initialQueryLiveData, initialDataObserver)
+            it.observe(failuresLiveData, failuresDataObserver)
+        }
         performInitialQuery(sourceQuery, initialSize)
     }
 
@@ -107,7 +108,14 @@ abstract class ChatHistoryAdapter<ChatViewModelType : BaseChatViewModel>(chatHis
     }
 
     private fun extractBuilder(type: Int, item: ChatItem? = null) = holderRegistersMap[type]
-        ?: defaultBuilder.apply { item?.let { Log.e(this@ChatHistoryAdapter.javaClass.simpleName, "Undefined holder layout. Item=$it") } }
+        ?: defaultBuilder.apply {
+            item?.let {
+                Log.e(
+                    this@ChatHistoryAdapter.javaClass.simpleName,
+                    "Undefined holder layout. Item=$it"
+                )
+            }
+        }
 
     protected var owner: LifecycleOwner? = null
     protected var attachedRecyclerView: RecyclerView? = null
@@ -128,10 +136,4 @@ abstract class ChatHistoryAdapter<ChatViewModelType : BaseChatViewModel>(chatHis
 
     private val defaultBuilder = builder(ChatItem::class, ::UndefinedChatViewHolder)
     private val newItemObserver = ItemsObserver(::handleNewItem)
-
-    interface ChatItem
-
-    interface OnItemClickListener {
-        fun onItemClicked(item: ChatItem)
-    }
 }

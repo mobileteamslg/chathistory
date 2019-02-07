@@ -1,7 +1,6 @@
 package com.mobileteam.chathistory.holder
 
 import android.view.ViewGroup
-import com.mobileteam.chathistory.adapter.ChatHistoryAdapter.ChatItem
 import com.mobileteam.chathistory.util.itemType
 import kotlin.reflect.KClass
 

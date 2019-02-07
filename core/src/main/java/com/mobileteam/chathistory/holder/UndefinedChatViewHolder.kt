@@ -3,7 +3,6 @@ package com.mobileteam.chathistory.holder
 import android.util.Log
 import android.view.ViewGroup
 import com.mobileteam.chathistory.R
-import com.mobileteam.chathistory.adapter.ChatHistoryAdapter.ChatItem
 import kotlinx.android.synthetic.main.chat_item_undefined.view.*
 
 class UndefinedChatViewHolder(parent: ViewGroup) : ChatViewHolder(parent, R.layout.chat_item_undefined) {
