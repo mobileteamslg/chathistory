@@ -2,7 +2,7 @@
 This is a module for chat functionality with lazy load of old messages. It uses Firebase Database by default.
 # Setup library
 Add to root project:
-```
+```gradle
 allprojects {
     repositories {
         ...
