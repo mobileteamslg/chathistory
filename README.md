@@ -13,7 +13,7 @@ allprojects {
 ...and dependency to gradle of your module:
 ```
 //core (you can implement source of lazy load by yourself)
-implementation 'com.github.mobileteamslg.chathistory:core:0.0.5-alpha2'
+implementation 'com.github.mobileteamslg.chathistory:core:$current_version'
 //lazy load with firebase
-implementation 'com.github.mobileteamslg.chathistory:firebasehistory:0.0.5-alpha2'
+implementation 'com.github.mobileteamslg.chathistory:firebasehistory:$current_version'
 ```
